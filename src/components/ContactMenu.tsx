@@ -18,12 +18,13 @@ const Contact:React.FC<ContactProps>  = ({selectedIndex, handleListItemClick, id
       >
         <ListItemIcon>
           <Avatar
-            alt={'Avatar n°1'}
+            alt={'John Doe'}
+            sx={{ backgroundColor: '#a30b47', height: 32, width: 32 }}
             src={'/static/images/avatar/r.jpg'}
           />
         </ListItemIcon>
 
-        <ListItemText primary="Inbox" />
+        <ListItemText primary="John Doe" />
 
       </ListItemButton>
     </React.Fragment>
@@ -53,7 +54,7 @@ export default function ContactMenu() {
         <Grid item pt={5} pb={2} pl={2} pr={2}>
           <Stack direction="row" spacing={2} justifyContent='space-between'>
             <Typography variant="h6">
-              Contact
+              Contacts
             </Typography>
 
             <IconButton color="primary" onClick={()=> setOpen(true)}>
