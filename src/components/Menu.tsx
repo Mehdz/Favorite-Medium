@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, Divider, Grid, Typography } from '@mui/material';
+import { Avatar, Grid, Typography } from '@mui/material';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import MessageIcon from '@mui/icons-material/Message';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -8,6 +8,7 @@ import '../assets/css/menu.css';
 import MessageMenu from './MessagesMenu';
 import ContactMenu from './ContactMenu';
 import Logo from '../assets/images/logo.png';
+import FavoriteMenu from './FavoriteMenu';
 
 interface MenuIconsProps {
   setMenu : (menu:number) => void,
@@ -19,27 +20,23 @@ const MenuIcons:React.FC<MenuIconsProps> = ({setMenu}) => {
       container
       direction="column"
     >
-      <Grid item sx={{ alignSelf: 'center', paddingBottom: 15 }}>
+      <Grid item sx={{ alignSelf: 'center', paddingBottom: 5 }}>
         <Avatar src={Logo} sx={{ bgcolor: '#a30b47', width: 80, height: 80, marginTop: 3 }}/>
-        <Divider sx={{marginTop: 2, backgroundColor: 'white'}} />
       </Grid>
 
-      <Divider />
       <Grid item className='menu-item' onClick={() => setMenu(0)}>
         <AccountBoxIcon sx={{ fontSize: 40 }} />
         <Typography variant="subtitle2" component="div" sx={{ textAlign: 'center' }}>
           CONTACTS
         </Typography>
       </Grid>
-      <Divider />
 
       <Grid item className='menu-item' onClick={() => setMenu(1)}>
         <FavoriteIcon sx={{ fontSize: 40 }} />
         <Typography variant="subtitle2" component="div" sx={{ textAlign: 'center' }}>
-          FAVORITES
+          FAVORITE
         </Typography>
       </Grid>
-      <Divider />
 
       <Grid item className='menu-item' onClick={() => setMenu(2)}>
         <MessageIcon sx={{ fontSize: 40 }} />
@@ -47,7 +44,7 @@ const MenuIcons:React.FC<MenuIconsProps> = ({setMenu}) => {
           MESSAGES
         </Typography>
       </Grid>
-      <Divider />
+
 
       <Grid item className='menu-item' onClick={() => setMenu(3)}>
         <TuneIcon sx={{ fontSize: 40 }} />
@@ -60,7 +57,11 @@ const MenuIcons:React.FC<MenuIconsProps> = ({setMenu}) => {
   );
 };
 
-export default function Menu() {
+interface MenuProps {
+  children: React.ReactNode,
+}
+
+const Menu:React.FC<MenuProps> = ({children}) => {
   const [menu, setMenu] = React.useState<number>(0);
 
   return (
@@ -70,23 +71,28 @@ export default function Menu() {
       justifyContent="flex-start"
       alignItems="flex-start"
     >
+
       <Grid item>
         <div className='main-box'>
           <div className='menu-box'>
-            <MenuIcons setMenu={setMenu}/>
+            <MenuIcons setMenu={setMenu} />
           </div>
         </div>
       </Grid>
+
       <Grid item>
         {menu === 0 ? <ContactMenu /> : ''}
-        {menu === 1 ? <ContactMenu /> : ''}
+        {menu === 1 ? <FavoriteMenu /> : ''}
         {menu === 2 ? <MessageMenu /> : ''}
         {menu === 3 ? <ContactMenu /> : ''}
       </Grid>
-      <Grid item xs>
-      content
-      </Grid>
-    </Grid>
 
+      <Grid item xs>
+        {children}
+      </Grid>
+
+    </Grid>
   );
-}
+};
+
+export default Menu;

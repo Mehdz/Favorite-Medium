@@ -25,7 +25,7 @@ const NewContactContent = () => {
         <FormControlLabel
           value="end"
           control={<Checkbox />}
-          label="Add to favorites"
+          label="Add to Favorite"
           labelPlacement="end"
         />
 

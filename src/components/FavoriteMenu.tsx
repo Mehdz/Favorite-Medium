@@ -1,36 +1,35 @@
-import { Avatar, Grid, IconButton, List, ListItemAvatar, ListItemButton, ListItemText, Stack, Typography } from '@mui/material';
 import React from 'react';
-import MapsUgcIcon from '@mui/icons-material/MapsUgc';
+import { Avatar, Grid, List, ListItemButton, ListItemIcon, ListItemText, Stack, Typography } from '@mui/material';
 
-interface MessageProps {
-  selectedIndex: number;
-  handleListItemClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>, index: number) => void;
-  id: number;
+interface FavoriteProps {
+    selectedIndex: number;
+    handleListItemClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>, index: number) => void;
+    id: number;
 }
 
-const Message:React.FC<MessageProps> = ({selectedIndex, handleListItemClick, id}) => {
+const Favorite:React.FC<FavoriteProps>  = ({selectedIndex, handleListItemClick, id}) => {
   return (
     <React.Fragment>
       <ListItemButton
         selected={selectedIndex === id}
         onClick={(event) => handleListItemClick(event, id)}
       >
-        <ListItemAvatar>
-          <Avatar alt="User" sx={{ bgcolor: '#a30b47' }}/>
-        </ListItemAvatar>
+        <ListItemIcon>
+          <Avatar
+            alt={'John Doe'}
+            sx={{ backgroundColor: '#a30b47', height: 32, width: 32 }}
+            src={'/static/images/avatar/r.jpg'}
+          />
+        </ListItemIcon>
 
-        <ListItemText
-          primary="Author"
-          secondary={'Message...'}
-        />
+        <ListItemText primary="John Doe" />
 
       </ListItemButton>
-
     </React.Fragment>
   );
 };
 
-export default function MessageMenu() {
+export default function FavoriteMenu() {
   const [selectedIndex, setSelectedIndex] = React.useState<number>(0);
 
   const handleListItemClick = (
@@ -39,6 +38,7 @@ export default function MessageMenu() {
   ) => {
     setSelectedIndex(index);
   };
+
   return (
     <div className='messages-box'>
       <Grid
@@ -46,22 +46,19 @@ export default function MessageMenu() {
         direction="column"
         justifyContent="flex-start"
       >
+
         <Grid item pt={5} pb={2} pl={2} pr={2}>
           <Stack direction="row" spacing={2} justifyContent='space-between'>
             <Typography variant="h6">
-              Messages
+              Favorite Contacts
             </Typography>
-
-            <IconButton color="primary">
-              <MapsUgcIcon />
-            </IconButton>
           </Stack>
         </Grid>
 
 
         <Grid item>
           <List style={{maxHeight: '87vh', overflow: 'auto'}} >
-            <Message selectedIndex={selectedIndex} handleListItemClick={handleListItemClick} id={0}/>
+            <Favorite selectedIndex={selectedIndex} handleListItemClick={handleListItemClick} id={0}/>
           </List>
         </Grid>
 
