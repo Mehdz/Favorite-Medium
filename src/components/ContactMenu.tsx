@@ -1,5 +1,7 @@
 import React from 'react';
-import { Avatar, Grid, List, ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material';
+import { Avatar, Grid, IconButton, List, ListItemButton, ListItemIcon, ListItemText, Stack, Typography } from '@mui/material';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import NewContact from './Modals/NewContact';
 
 interface ContactProps {
     selectedIndex: number;
@@ -30,6 +32,7 @@ const Contact:React.FC<ContactProps>  = ({selectedIndex, handleListItemClick, id
 
 export default function ContactMenu() {
   const [selectedIndex, setSelectedIndex] = React.useState<number>(0);
+  const [open, setOpen] = React.useState(false);
 
   const handleListItemClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
@@ -40,15 +43,23 @@ export default function ContactMenu() {
 
   return (
     <div className='messages-box'>
+      { open && <NewContact open={open} setOpen={setOpen} /> }
       <Grid
         container
         direction="column"
         justifyContent="flex-start"
       >
-        <Grid item pt={5} pb={2} pl={2}>
-          <Typography variant="h6">
-            Contact
-          </Typography>
+
+        <Grid item pt={5} pb={2} pl={2} pr={2}>
+          <Stack direction="row" spacing={2} justifyContent='space-between'>
+            <Typography variant="h6">
+              Contact
+            </Typography>
+
+            <IconButton color="primary" onClick={()=> setOpen(true)}>
+              <PersonAddIcon />
+            </IconButton>
+          </Stack>
         </Grid>
 
 
@@ -56,7 +67,6 @@ export default function ContactMenu() {
           <List style={{maxHeight: '87vh', overflow: 'auto'}} >
             <Contact selectedIndex={selectedIndex} handleListItemClick={handleListItemClick} id={0}/>
           </List>
-
         </Grid>
 
       </Grid>
