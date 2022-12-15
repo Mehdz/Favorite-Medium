@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body {
+    background-color: #fef9f9;
+    margin: 0;
+}
+
+.box {
+    background-color: #ffffff;
+    height: 100vh;
+    border-right: 1px solid #f8ecf1;
+}
+
+.contact-details-box {
+    height: 100vh;
+}
