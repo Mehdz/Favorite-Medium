@@ -1,12 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-type Contact = {
-  id?: number;
-  name: string;
-  email: string;
-  phone: string;
-  isFavorite: boolean;
-};
+import { Contact } from '../constants/types';
 
 const initialState = [] as Contact[];
 

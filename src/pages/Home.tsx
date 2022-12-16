@@ -27,7 +27,7 @@ const Home: React.FC<HomeProps> = (props) => {
         <Grid item md={6}>
           <Messages />
         </Grid>
-        <Grid md={3}>
+        <Grid item md={3}>
           <ContactDetails />
         </Grid>
       </>

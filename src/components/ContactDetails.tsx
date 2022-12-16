@@ -3,75 +3,129 @@ import { Avatar, Button, Divider, Grid, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import EditIcon from '@mui/icons-material/Edit';
+import { RootState } from '../reducers/store';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { editFav, removeContact } from '../reducers/contactSlice';
+import EditContact from './Modals/EditContact';
+import { Contact } from '../constants/types';
 
 export default function ContactDetails() {
+  const dispatch = useDispatch();
+  const [open, setOpen] = React.useState(false);
+  const contacts = useSelector((state: RootState) => state.contactSlice);
+  const user = useSelector((state: RootState) => state.userSlice);
+  const [selectedContact, setSelectedContact] = React.useState<Contact>({
+    name: '',
+    email: '',
+    phone: '',
+    isFavorite: false,
+  });
+
+  React.useEffect(() => {
+    const contact = contacts.find((contact: Contact) => contact.id === user.user.selectedContactId);
+
+    if (contact)
+      setSelectedContact(contact);
+    else
+      setSelectedContact({
+        name: '',
+        email: '',
+        phone: '',
+        isFavorite: false,
+      });
+
+  }, [user.user.selectedContactId, contacts]);
+
+  console.log(selectedContact);
+
   return (
-    <div className='contact-details-box'>
-      <Grid
-        container
-        direction="column"
-        alignContent={'center'}
-        sx={{textAlign: 'center'}}
-      >
+    <React.Fragment>
+      { selectedContact && selectedContact.id ?
+        <div className='contact-details-box'>
+          { open && <EditContact open={open} setOpen={setOpen} contactId={selectedContact.id || 0}/> }
+          <Grid
+            container
+            direction="column"
+            alignContent={'center'}
+            sx={{textAlign: 'center'}}
+          >
 
-        <Grid item pt={5} pb={2} pl={2} pr={2}>
-          <Typography variant="h6">
-            Contact
-          </Typography>
-        </Grid>
+            <Grid item pt={5} pb={2} pl={2} pr={2}>
+              <Typography variant="h6">
+                Contact
+              </Typography>
+            </Grid>
 
-        <Grid item pb={2} pl={2} pr={2}>
-          <Avatar
-            alt={'John Doe'}
-            src={'/static/images/avatar/r.jpg'}
-            sx={{ height: 200, width: 200 }}
-          />
-        </Grid>
+            <Grid item pb={2} pl={2} pr={2}>
+              <Avatar
+                alt={selectedContact.name + ' \'s avatar'}
+                src={'/static/images/avatar/r.jpg'}
+                sx={{ height: 200, width: 200,backgroundColor : '#a30b47' }}
+              />
+            </Grid>
 
-        <Grid item pt={5} pb={2} pl={2} pr={2}>
-          <Typography color="primary">
-            Name
-          </Typography>
-          <Typography variant="h5" component="div" pb={2}>
-            John Doe
-          </Typography>
-          <Typography color="primary" variant="subtitle2">
-            Email
-          </Typography>
-          <Typography variant="h6" component="div" pb={2}>
-            john.doe@email.com
-          </Typography>
-        </Grid>
-      </Grid>
+            <Grid item pt={5} pb={2} pl={2} pr={2}>
+              <Typography color="primary">
+                Name
+              </Typography>
+              <Typography variant="h5" component="div" pb={2}>
+                {selectedContact.name}
+              </Typography>
+              <Typography color="primary" variant="subtitle2">
+                Email
+              </Typography>
+              <Typography variant="h6" component="div" pb={2}>
+                {selectedContact.email}
+              </Typography>
+            </Grid>
+          </Grid>
 
-      <Divider />
+          <Divider />
 
-      <Grid
-        container
-        direction="column"
-        spacing={2}
-        p={4}
-      >
-        <Grid item xs>
-          <Button variant="contained" color="primary" fullWidth startIcon={<FavoriteIcon />}>
-              Fav this Contact
-          </Button>
-        </Grid>
+          <Grid
+            container
+            direction="column"
+            spacing={2}
+            p={4}
+          >
+            <Grid item xs>
+              <Button
+                variant="contained"
+                color="primary"
+                fullWidth
+                startIcon={<FavoriteIcon />}
+                onClick={() => dispatch(editFav(selectedContact.id || 0))}>
+                {selectedContact.isFavorite ? 'Unfavorite this Contact' : 'Favorite this Contact'}
+              </Button>
+            </Grid>
 
-        <Grid item xs>
-          <Button variant="contained" color="primary" fullWidth startIcon={<EditIcon />}>
-              Edit Contact
-          </Button>
-        </Grid>
+            <Grid item xs>
+              <Button
+                variant="contained"
+                color="primary"
+                fullWidth
+                startIcon={<EditIcon />}
+                onClick={()=> setOpen(true)}>
+                Edit Contact
+              </Button>
+            </Grid>
 
-        <Grid item xs>
-          <Button variant="text" color="error" fullWidth startIcon={<DeleteIcon />}>
-          Delete Contact
-          </Button>
-        </Grid>
+            <Grid item xs>
+              <Button
+                variant="text"
+                color="primary"
+                fullWidth
+                startIcon={<DeleteIcon />}
+                onClick={() => dispatch(removeContact(selectedContact.id || 0))}>
+                Delete Contact
+              </Button>
+            </Grid>
 
-      </Grid>
+          </Grid>
 
-    </div>
+        </div>
+        : ''}
+    </React.Fragment>
   );
 }

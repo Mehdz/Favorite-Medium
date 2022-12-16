@@ -5,6 +5,7 @@ type User = {
   email: string;
   phone: string;
   isLogged: boolean;
+  selectedContactId?: number;
 };
 
 type UserState = {
@@ -34,10 +35,16 @@ export const userSlice = createSlice({
       state: UserState,
     ) {
       state.user = (initialState.user);
-    }
+    },
+    editSelectedContactId(
+      state: UserState,
+      action: PayloadAction<number>
+    ) {
+      state.user.selectedContactId = (action.payload);
+    },
   },
 });
 
-export const { addUser, removeUser } = userSlice.actions;
+export const { addUser, removeUser, editSelectedContactId } = userSlice.actions;
 
 export default userSlice.reducer;

@@ -3,7 +3,6 @@ import { Avatar, Grid, Typography } from '@mui/material';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import MessageIcon from '@mui/icons-material/Message';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import TuneIcon from '@mui/icons-material/Tune';
 import '../assets/css/menu.css';
 import Logo from '../assets/images/logo.png';
 
@@ -41,15 +40,6 @@ const MenuIcons:React.FC<MenuIconsProps> = ({setMenu}) => {
           MESSAGES
         </Typography>
       </Grid>
-
-
-      <Grid item className='menu-item' onClick={() => setMenu(3)}>
-        <TuneIcon sx={{ fontSize: 40 }} />
-        <Typography variant="subtitle2" component="div" sx={{ textAlign: 'center' }}>
-          SETTINGS
-        </Typography>
-      </Grid>
-
     </Grid>
   );
 };
