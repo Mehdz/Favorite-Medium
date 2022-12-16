@@ -7,14 +7,16 @@ interface ContactProps {
     selectedIndex: number;
     handleListItemClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>, index: number) => void;
     id: number;
-}
+  }
 
 const Contact:React.FC<ContactProps>  = ({selectedIndex, handleListItemClick, id}) => {
   return (
     <React.Fragment>
       <ListItemButton
         selected={selectedIndex === id}
-        onClick={(event) => handleListItemClick(event, id)}
+        onClick={(event) => {
+          handleListItemClick(event, id);
+        }}
       >
         <ListItemIcon>
           <Avatar
@@ -31,7 +33,11 @@ const Contact:React.FC<ContactProps>  = ({selectedIndex, handleListItemClick, id
   );
 };
 
-export default function ContactMenu() {
+interface ContactMenuProps {
+  setComponentId: (id: number) => void,
+}
+
+const ContactMenu: React.FC<ContactMenuProps> = ({setComponentId}) => {
   const [selectedIndex, setSelectedIndex] = React.useState<number>(0);
   const [open, setOpen] = React.useState(false);
 
@@ -40,7 +46,9 @@ export default function ContactMenu() {
     index: number,
   ) => {
     setSelectedIndex(index);
+    setComponentId(4);
   };
+
 
   return (
     <div className='messages-box'>
@@ -66,7 +74,7 @@ export default function ContactMenu() {
 
         <Grid item>
           <List style={{maxHeight: '87vh', overflow: 'auto'}} >
-            <Contact selectedIndex={selectedIndex} handleListItemClick={handleListItemClick} id={0}/>
+            <Contact selectedIndex={selectedIndex} handleListItemClick={handleListItemClick} id={0} />
           </List>
         </Grid>
 
@@ -74,4 +82,6 @@ export default function ContactMenu() {
 
     </div>
   );
-}
+};
+
+export default ContactMenu;

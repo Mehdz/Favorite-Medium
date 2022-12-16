@@ -5,10 +5,7 @@ import MessageIcon from '@mui/icons-material/Message';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import TuneIcon from '@mui/icons-material/Tune';
 import '../assets/css/menu.css';
-import MessageMenu from './MessagesMenu';
-import ContactMenu from './ContactMenu';
 import Logo from '../assets/images/logo.png';
-import FavoriteMenu from './FavoriteMenu';
 
 interface MenuIconsProps {
   setMenu : (menu:number) => void,
@@ -59,11 +56,10 @@ const MenuIcons:React.FC<MenuIconsProps> = ({setMenu}) => {
 
 interface MenuProps {
   children: React.ReactNode,
+  setMenuId: (menuId:number) => void,
 }
 
-const Menu:React.FC<MenuProps> = ({children}) => {
-  const [menu, setMenu] = React.useState<number>(0);
-
+const Menu:React.FC<MenuProps> = ({children, setMenuId}) => {
   return (
     <Grid
       container
@@ -75,22 +71,14 @@ const Menu:React.FC<MenuProps> = ({children}) => {
       <Grid item>
         <div className='main-box'>
           <div className='menu-box'>
-            <MenuIcons setMenu={setMenu} />
+            <MenuIcons setMenu={setMenuId} />
           </div>
         </div>
-      </Grid>
-
-      <Grid item>
-        {menu === 0 ? <ContactMenu /> : ''}
-        {menu === 1 ? <FavoriteMenu /> : ''}
-        {menu === 2 ? <MessageMenu /> : ''}
-        {menu === 3 ? <ContactMenu /> : ''}
       </Grid>
 
       <Grid item xs>
         {children}
       </Grid>
-
     </Grid>
   );
 };

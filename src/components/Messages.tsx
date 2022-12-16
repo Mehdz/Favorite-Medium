@@ -48,7 +48,7 @@ const Messages = () => {
   return (
     <div className='box'>
       <Container sx={{paddingTop: 4}}>
-        <List style={{height: '78vh', overflow: 'auto'}} >
+        <List sx={{height: {xs : '74vh', md: '74vh', lg :'78vh'}, overflow: 'auto'}} >
           <Grid container spacing={2} flexDirection='column'>
             <Grid item xs>
               <SendedMessage message={message} />

@@ -11,7 +11,6 @@ export default function ContactDetails() {
         container
         direction="column"
         alignContent={'center'}
-        justifyContent={'center'}
         sx={{textAlign: 'center'}}
       >
 
@@ -19,15 +18,17 @@ export default function ContactDetails() {
           <Typography variant="h6">
             Contact
           </Typography>
+        </Grid>
 
-          <div style={{padding: 40}}>
-            <Avatar
-              alt={'Avatar n°1'}
-              src={'/static/images/avatar/r.jpg'}
-              sx={{ height: 200, width: 200, alignSelf: 'center'}}
-            />
-          </div>
+        <Grid item pb={2} pl={2} pr={2}>
+          <Avatar
+            alt={'John Doe'}
+            src={'/static/images/avatar/r.jpg'}
+            sx={{ height: 200, width: 200 }}
+          />
+        </Grid>
 
+        <Grid item pt={5} pb={2} pl={2} pr={2}>
           <Typography color="primary">
             Name
           </Typography>

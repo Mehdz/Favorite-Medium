@@ -39,17 +39,12 @@
 }
 
 .messages-box {
-    width: 250px;
     height: 100vh;
     border-right: 1px solid #f8ecf1;
 }
 
-@media (max-width:900px) {
+@media (max-width:1024px) {
     .main-box {
-        display: none;
-    }
-
-    .messages-box {
         display: none;
     }
 }

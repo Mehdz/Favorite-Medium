@@ -29,7 +29,11 @@ const Favorite:React.FC<FavoriteProps>  = ({selectedIndex, handleListItemClick, 
   );
 };
 
-export default function FavoriteMenu() {
+interface FavoriteMenuProps {
+  setComponentId: (id: number) => void,
+}
+
+const FavoriteMenu: React.FC<FavoriteMenuProps> = ({setComponentId}) => {
   const [selectedIndex, setSelectedIndex] = React.useState<number>(0);
 
   const handleListItemClick = (
@@ -37,6 +41,7 @@ export default function FavoriteMenu() {
     index: number,
   ) => {
     setSelectedIndex(index);
+    setComponentId(4);
   };
 
   return (
@@ -66,4 +71,6 @@ export default function FavoriteMenu() {
 
     </div>
   );
-}
+};
+
+export default FavoriteMenu;

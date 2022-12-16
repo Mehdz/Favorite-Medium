@@ -30,7 +30,11 @@ const Message:React.FC<MessageProps> = ({selectedIndex, handleListItemClick, id}
   );
 };
 
-export default function MessageMenu() {
+interface MessageMenuProps {
+  setComponentId: (id: number) => void,
+}
+
+const MessageMenu: React.FC<MessageMenuProps> = ({setComponentId}) => {
   const [selectedIndex, setSelectedIndex] = React.useState<number>(0);
 
   const handleListItemClick = (
@@ -38,7 +42,9 @@ export default function MessageMenu() {
     index: number,
   ) => {
     setSelectedIndex(index);
+    setComponentId(3);
   };
+
   return (
     <div className='messages-box'>
       <Grid
@@ -69,4 +75,6 @@ export default function MessageMenu() {
 
     </div>
   );
-}
+};
+
+export default MessageMenu;
