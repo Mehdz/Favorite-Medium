@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type Contact = {
+  id?: number;
   name: string;
   email: string;
   phone: string;
@@ -15,12 +16,14 @@ export const contactSlice = createSlice({
   initialState,
   reducers: {
     addContact(state, action: PayloadAction<Contact>) {
-      state.push(action.payload);
+      const data = action.payload;
+      data.id = state.length;
+      state.push(data);
     },
-    removeContact(state, action: PayloadAction<string>) {
-      state = initialState;
-      const index = state.findIndex((contact) => contact.email === action.payload);
-      state.splice(index, 1);
+    removeContact(state, action: PayloadAction<number>) {
+      const index = state.findIndex((contact) => contact.id === action.payload);
+      if (index > -1)
+        state.splice(index, 1);
     },
     editContact(
       state,
@@ -32,9 +35,17 @@ export const contactSlice = createSlice({
       state[index].phone = action.payload.phone;
       state[index].isFavorite = action.payload.isFavorite;
     },
+    editFav(
+      state,
+      action: PayloadAction<number>
+    ) {
+      const index = state.findIndex((contact) => contact.id === action.payload);
+      state[index].isFavorite = !state[index].isFavorite;
+    },
+
   },
 });
 
-export const { addContact, removeContact } = contactSlice.actions;
+export const { addContact, removeContact, editContact, editFav } = contactSlice.actions;
 
 export default contactSlice.reducer;

@@ -24,7 +24,6 @@ const rootReducer = combineReducers({
   contactSlice
 });
 
-
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
