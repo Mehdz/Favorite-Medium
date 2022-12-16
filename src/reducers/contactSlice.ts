@@ -8,34 +8,31 @@ type Contact = {
   isFavorite: boolean;
 };
 
-type ContactState = {
-  contact: Contact;
-};
+const initialState = [] as Contact[];
 
-const initialState: ContactState = {
-  contact: {
-    name: '',
-    email: '',
-    phone: '',
-    isFavorite: false
-  }
-};
 
 export const contactSlice = createSlice({
   name: 'contact',
   initialState,
   reducers: {
-    addContact(
-      state: ContactState,
+    addContact(state, action: PayloadAction<Contact>) {
+      state.push(action.payload);
+    },
+    removeContact(state, action: PayloadAction<string>) {
+      state = initialState;
+      const index = state.findIndex((contact) => contact.email === action.payload);
+      state.splice(index, 1);
+    },
+    editContact(
+      state,
       action: PayloadAction<Contact>
     ) {
-      state.contact = (action.payload);
+      const index = state.findIndex((contact) => contact.email === action.payload.email);
+      state[index].name = action.payload.name;
+      state[index].email = action.payload.email;
+      state[index].phone = action.payload.phone;
+      state[index].isFavorite = action.payload.isFavorite;
     },
-    removeContact(
-      state: ContactState,
-    ) {
-      state.contact = (initialState.contact);
-    }
   },
 });
 
