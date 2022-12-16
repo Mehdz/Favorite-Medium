@@ -17,7 +17,7 @@ export const contactSlice = createSlice({
   reducers: {
     addContact(state, action: PayloadAction<Contact>) {
       const data = action.payload;
-      data.id = state.length;
+      data.id = state.length + 1;
       state.push(data);
     },
     removeContact(state, action: PayloadAction<number>) {
@@ -30,17 +30,21 @@ export const contactSlice = createSlice({
       action: PayloadAction<Contact>
     ) {
       const index = state.findIndex((contact) => contact.email === action.payload.email);
-      state[index].name = action.payload.name;
-      state[index].email = action.payload.email;
-      state[index].phone = action.payload.phone;
-      state[index].isFavorite = action.payload.isFavorite;
+      if (index > -1) {
+        state[index].name = action.payload.name;
+        state[index].email = action.payload.email;
+        state[index].phone = action.payload.phone;
+        state[index].isFavorite = action.payload.isFavorite;
+      }
     },
     editFav(
       state,
       action: PayloadAction<number>
     ) {
       const index = state.findIndex((contact) => contact.id === action.payload);
-      state[index].isFavorite = !state[index].isFavorite;
+      console.log(action.payload);
+      if (index > -1)
+        state[index].isFavorite = !state[index].isFavorite;
     },
 
   },
