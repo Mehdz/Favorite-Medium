@@ -2,11 +2,7 @@ import React from 'react';
 import { Avatar, Card, CardContent, Grid, List, Stack, TextField, Typography } from '@mui/material';
 import { Container } from '@mui/system';
 
-interface SendedMessageProps {
-  message : string,
-}
-
-const SendedMessage: React.FC<SendedMessageProps> = ({message}) => {
+const SendedMessage: React.FC = () => {
   return (
     <Stack direction="row-reverse" spacing={2} sx={{ width: '100%' }}>
       <Avatar alt={'John Doe'} src={'/static/images/avatar/r.jpg'} sx={{ height: 50, width: 50 }} />
@@ -14,7 +10,7 @@ const SendedMessage: React.FC<SendedMessageProps> = ({message}) => {
       <Card sx={{backgroundColor: '#a30b47', maxWidth: '70vh', color: 'white'}}>
         <CardContent>
           <Typography variant="subtitle1" component="div">
-            {message}
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc ut
           </Typography>
         </CardContent>
       </Card>
@@ -22,7 +18,7 @@ const SendedMessage: React.FC<SendedMessageProps> = ({message}) => {
   );
 };
 
-const ReceivedMessage = () => {
+const ReceivedMessage: React.FC = () => {
   return (
     <Stack direction="row" spacing={2} sx={{ width: '100%' }}>
       <Avatar alt={'John Doe'} src={'/static/images/avatar/r.jpg'} sx={{ height: 50, width: 50 }} />
@@ -32,8 +28,6 @@ const ReceivedMessage = () => {
           <Typography variant="subtitle1" component="div">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc ut
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc ut
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc ut
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc ut
           </Typography>
         </CardContent>
       </Card>
@@ -42,31 +36,23 @@ const ReceivedMessage = () => {
 };
 
 
-const Messages = () => {
-  const message = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc ut';
-
+const Messages: React.FC = () => {
   return (
     <div className='box'>
       <Container sx={{paddingTop: 4}}>
         <List sx={{height: {xs : '74vh', md: '74vh', lg :'78vh'}, overflow: 'auto'}} >
           <Grid container spacing={2} flexDirection='column'>
             <Grid item xs>
-              <SendedMessage message={message} />
+              <SendedMessage />
             </Grid>
             <Grid item xs>
-              <SendedMessage message={message} />
-            </Grid>
-            <Grid item xs>
-              <ReceivedMessage />
-            </Grid>
-            <Grid item xs>
-              <SendedMessage message={message} />
+              <SendedMessage />
             </Grid>
             <Grid item xs>
               <ReceivedMessage />
             </Grid>
             <Grid item xs>
-              <ReceivedMessage />
+              <SendedMessage />
             </Grid>
             <Grid item xs>
               <ReceivedMessage />
@@ -75,7 +61,13 @@ const Messages = () => {
               <ReceivedMessage />
             </Grid>
             <Grid item xs>
+              <SendedMessage />
+            </Grid>
+            <Grid item xs>
               <ReceivedMessage />
+            </Grid>
+            <Grid item xs>
+              <SendedMessage />
             </Grid>
 
           </Grid>
