@@ -28,7 +28,7 @@ const Home: React.FC<HomeProps> = (props) => {
           <Messages />
         </Grid>
         <Grid item md={3}>
-          <ContactDetails />
+          <ContactDetails setComponentId={setComponentId}/>
         </Grid>
       </>
       }
@@ -55,7 +55,7 @@ const Home: React.FC<HomeProps> = (props) => {
       }
       {mobile && componentId === 4 &&
       <Grid item xs={12} md={3}>
-        <ContactDetails />
+        <ContactDetails setComponentId={setComponentId}/>
       </Grid>
       }
     </Grid>

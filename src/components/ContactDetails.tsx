@@ -10,7 +10,11 @@ import { editFav, removeContact } from '../reducers/contactSlice';
 import EditContact from './Modals/EditContact';
 import { Contact } from '../constants/types';
 
-export default function ContactDetails() {
+interface ContactDetailsProps {
+  setComponentId: (id: number) => void,
+}
+
+const ContactDetails: React.FC<ContactDetailsProps> = ({setComponentId}) => {
   const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
   const contacts = useSelector((state: RootState) => state.contactSlice);
@@ -27,13 +31,15 @@ export default function ContactDetails() {
 
     if (contact)
       setSelectedContact(contact);
-    else
+    else {
       setSelectedContact({
         name: '',
         email: '',
         phone: '',
         isFavorite: false,
       });
+      setComponentId(0);
+    }
 
   }, [user.user.selectedContactId, contacts]);
 
@@ -128,4 +134,6 @@ export default function ContactDetails() {
         : ''}
     </React.Fragment>
   );
-}
+};
+
+export default ContactDetails;
