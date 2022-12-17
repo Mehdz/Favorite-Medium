@@ -64,7 +64,6 @@ const ContactDetails: React.FC<ContactDetailsProps> = ({setComponentId}) => {
             <Grid item pb={2} pl={2} pr={2}>
               <Avatar
                 alt={selectedContact.name + ' \'s avatar'}
-                src={'/static/images/avatar/r.jpg'}
                 sx={{ height: 200, width: 200,backgroundColor : '#a30b47' }}
               />
             </Grid>

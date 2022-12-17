@@ -5,7 +5,7 @@ import { Container } from '@mui/system';
 const SendedMessage: React.FC = () => {
   return (
     <Stack direction="row-reverse" spacing={2} sx={{ width: '100%' }}>
-      <Avatar alt={'John Doe'} src={'/static/images/avatar/r.jpg'} sx={{ height: 50, width: 50 }} />
+      <Avatar sx={{ height: 50, width: 50, backgroundColor: 'primary.main' }} />
 
       <Card sx={{backgroundColor: '#a30b47', maxWidth: '70vh', color: 'white'}}>
         <CardContent>
@@ -21,7 +21,7 @@ const SendedMessage: React.FC = () => {
 const ReceivedMessage: React.FC = () => {
   return (
     <Stack direction="row" spacing={2} sx={{ width: '100%' }}>
-      <Avatar alt={'John Doe'} src={'/static/images/avatar/r.jpg'} sx={{ height: 50, width: 50 }} />
+      <Avatar sx={{ height: 50, width: 50, backgroundColor: '#b7a6ad' }} />
 
       <Card sx={{backgroundColor: '#b7a6ad', maxWidth: '70vh', color: 'white'}}>
         <CardContent>
