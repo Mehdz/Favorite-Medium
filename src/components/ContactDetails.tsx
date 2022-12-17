@@ -82,6 +82,17 @@ const ContactDetails: React.FC<ContactDetailsProps> = ({setComponentId}) => {
               <Typography variant="h6" component="div" pb={2}>
                 {selectedContact.email}
               </Typography>
+              {selectedContact?.phone &&
+              <div>
+                <Typography color="primary" variant="subtitle2">
+                Phone
+                </Typography>
+                <Typography variant="h6" component="div" pb={2}>
+                  {selectedContact.phone}
+                </Typography>
+              </div>
+              }
+
             </Grid>
           </Grid>
 
