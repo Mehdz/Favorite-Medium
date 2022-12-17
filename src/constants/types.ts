@@ -5,3 +5,11 @@ export type Contact = {
   phone: string;
   isFavorite: boolean;
 };
+
+declare module '@mui/material/styles/createPalette' {
+  export interface PaletteOptions {
+    mode?: 'light' | 'dark';
+    primary?: PaletteColorOptions;
+    secondary?: PaletteColorOptions;
+  }
+}
