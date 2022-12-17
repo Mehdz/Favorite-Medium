@@ -43,8 +43,6 @@ const ContactDetails: React.FC<ContactDetailsProps> = ({setComponentId}) => {
 
   }, [user.user.selectedContactId, contacts]);
 
-  console.log(selectedContact);
-
   return (
     <React.Fragment>
       { selectedContact && selectedContact.id ?

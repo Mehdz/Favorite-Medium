@@ -23,7 +23,8 @@ export const contactSlice = createSlice({
       state,
       action: PayloadAction<Contact>
     ) {
-      const index = state.findIndex((contact) => contact.email === action.payload.email);
+      const index = state.findIndex((contact) => contact.id === action.payload.id);
+
       if (index > -1) {
         state[index].name = action.payload.name;
         state[index].email = action.payload.email;
@@ -36,7 +37,6 @@ export const contactSlice = createSlice({
       action: PayloadAction<number>
     ) {
       const index = state.findIndex((contact) => contact.id === action.payload);
-      console.log(action.payload);
       if (index > -1)
         state[index].isFavorite = !state[index].isFavorite;
     },

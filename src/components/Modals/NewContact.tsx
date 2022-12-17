@@ -75,7 +75,7 @@ const NewContactForm: React.FC<NewContactFormProps> = ({setOpen}) => {
 
       </CardContent>
       <CardActions>
-        <Button size="small" fullWidth variant='outlined' color='secondary' type="submit" onClick={() => console.log(contact)}>
+        <Button size="small" fullWidth variant='outlined' color='secondary' type="submit">
         Save
         </Button>
       </CardActions>
