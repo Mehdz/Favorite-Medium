@@ -10,7 +10,8 @@ export const contactSlice = createSlice({
   reducers: {
     addContact(state, action: PayloadAction<Contact>) {
       const data = action.payload;
-      data.id = state.length + 1;
+
+      data.id = (state[state?.length - 1]?.id || 0) + 1;
       state.push(data);
     },
     removeContact(state, action: PayloadAction<number>) {
